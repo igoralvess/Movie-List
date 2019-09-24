@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        //teste
         val apiKey = "3a486fc9e00686c561325c6b8f5efdc1"
         val language = "en-US"
         val sortBy = "popularity.desc"
