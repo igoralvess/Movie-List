@@ -1,8 +1,8 @@
 package com.example.movie
 
+import com.example.movie.main.data.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieService {

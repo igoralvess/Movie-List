@@ -4,8 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.movie.main.data.model.MovieResponse
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureMovies(movies: MovieResponse) {
         recyclerView_main.layoutManager = GridLayoutManager(this, 3)
-        recyclerView_main.adapter = MainAdapter(movies)
+ //       recyclerView_main.adapter = MainAdapter(movies)
     }
 
 }

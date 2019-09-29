@@ -1,15 +1,17 @@
-package com.example.movie
+package com.example.movie.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.movie.R
 import com.example.movie.main.data.model.Movie
-import com.example.movie.main.data.model.MovieResponse
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_row.view.*
 
+class MovieAdapter : RecyclerView.Adapter<CustomViewHolder>() {
 
-class MainAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<CustomViewHolder>() {
+    var movies = ArrayList<Movie>()
 
     override fun getItemCount(): Int {
         return movies.size
@@ -27,5 +29,12 @@ class MainAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Custom
         val poster = holder.view.imageView_poster
         Picasso.with(poster.context).load("https://image.tmdb.org/t/p/w500" + movies[position].poster_path).into(poster)
     }
+
+    fun setMovieList(movies: ArrayList<Movie>) {
+        this.movies.addAll(movies)
+        notifyDataSetChanged()
+    }
+}
+class CustomViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
 
 }
