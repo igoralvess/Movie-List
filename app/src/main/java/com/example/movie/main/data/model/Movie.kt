@@ -1,6 +1,7 @@
 package com.example.movie.main.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
 data class Movie (
@@ -9,4 +10,4 @@ data class Movie (
 	@SerializedName("title") val title : String,
 	@SerializedName("overview") val overview : String,
 	@SerializedName("release_date") val release_date : String
-)
+) : Serializable

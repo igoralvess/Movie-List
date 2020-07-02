@@ -9,9 +9,10 @@ import com.example.movie.main.data.model.Movie
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_row.view.*
 
-class MovieAdapter : RecyclerView.Adapter<CustomViewHolder>() {
-
-    var movies = ArrayList<Movie>()
+class MovieAdapter(
+    private val movies: ArrayList<Movie>,
+    private val onClick: (Movie) -> Unit
+    ) : RecyclerView.Adapter<CustomViewHolder>() {
 
     override fun getItemCount(): Int {
         return movies.size
@@ -21,20 +22,29 @@ class MovieAdapter : RecyclerView.Adapter<CustomViewHolder>() {
 
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.movie_row, parent, false)
-        return CustomViewHolder(cellForRow)
+        return CustomViewHolder(cellForRow, onClick)
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.view.title.text = movies[position].title
-        val poster = holder.view.imageView_poster
-        Picasso.with(poster.context).load("https://image.tmdb.org/t/p/w500" + movies[position].poster_path).into(poster)
+        holder.bind(movies[position])
     }
+
+
 
     fun setMovieList(movies: ArrayList<Movie>) {
         this.movies.addAll(movies)
         notifyDataSetChanged()
     }
 }
-class CustomViewHolder(val view : View) : RecyclerView.ViewHolder(view) {
-
+class CustomViewHolder(private val view : View, private val onClick: (Movie) -> Unit) : RecyclerView.ViewHolder(view) {
+    fun bind(movie: Movie) {
+        itemView.apply {
+            title.text = movie.title
+            val poster = imageView_poster
+            Picasso.with(poster.context).load("https://image.tmdb.org/t/p/w500" + movie.poster_path).into(poster)
+            movieCard.setOnClickListener {
+                onClick(movie)
+            }
+        }
+    }
 }
