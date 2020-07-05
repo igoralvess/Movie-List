@@ -10,10 +10,13 @@ import com.example.movie.main.data.model.MovieRequest
 import com.example.movie.main.data.model.MovieResponse
 import com.example.movie.main.data.repository.MovieRepository
 import com.example.movie.utils.Constants
+import javax.inject.Inject
 
-class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
+class MovieViewModel @Inject constructor(
+    private val repository: MovieRepository
+) : ViewModel() {
 
-      private lateinit var mutableLiveData: MutableLiveData<MovieResponse>
+    private lateinit var mutableLiveData: MutableLiveData<MovieResponse>
 
     fun init() {
         val params = MovieRequest(Constants.API_KEY, "1")
@@ -24,10 +27,4 @@ class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
         return mutableLiveData
     }
 
-    class MovieViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.Factory{
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return MovieViewModel(repository) as T
-        }
-
-    }
 }

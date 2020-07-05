@@ -16,8 +16,6 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class DetailActivity : AppCompatActivity(){
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -28,6 +26,6 @@ class DetailActivity : AppCompatActivity(){
         var movie = intent.getSerializableExtra("movie") as Movie
         detailTitle.text = movie.title
         detailOverview.text = movie.overview
-        Picasso.with(detailPoster.context).load("https://image.tmdb.org/t/p/w500" + movie.poster_path).into(detailPoster)
+        Picasso.with(detailPoster.context).load("https://image.tmdb.org/t/p/original" + movie.backdrop_path).into(detailPoster)
     }
 }

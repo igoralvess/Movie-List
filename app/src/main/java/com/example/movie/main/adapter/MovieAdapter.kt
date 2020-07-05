@@ -29,8 +29,6 @@ class MovieAdapter(
         holder.bind(movies[position])
     }
 
-
-
     fun setMovieList(movies: ArrayList<Movie>) {
         this.movies.addAll(movies)
         notifyDataSetChanged()
