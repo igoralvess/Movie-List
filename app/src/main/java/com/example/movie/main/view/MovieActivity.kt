@@ -2,16 +2,13 @@ package com.example.movie.main.view
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
 import com.example.movie.main.adapter.MovieAdapter
 import com.example.movie.main.data.model.Movie
-import com.example.movie.main.data.model.MovieResponse
-import com.example.movie.main.data.repository.MovieRepository
 import com.example.movie.main.viewmodel.MovieViewModel
 import com.example.movie.utils.ViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
@@ -35,16 +32,6 @@ class MovieActivity : DaggerAppCompatActivity() {
         setContentView(R.layout.activity_main)
         setupViewModel()
         setupObservers()
-        setupListeners()
-    }
-
-    private fun setupListeners() {
-        recyclerView_main.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-            }
-
-        })
     }
 
     private fun setupViewModel() {
@@ -52,16 +39,17 @@ class MovieActivity : DaggerAppCompatActivity() {
     }
 
     private fun setupObservers() {
-        viewModel.getMovies().observe(this, Observer<MovieResponse> { response ->
-            addMovie(response)
-
+        viewModel.moviePagedList.observe(this, Observer { response ->
+            addMovies(response)
         })
+        viewModel
     }
 
-    private fun addMovie(response: MovieResponse) {
-        adapter = MovieAdapter(response.results) {
+    private fun addMovies(response: PagedList<Movie>) {
+        adapter = MovieAdapter {
             startDetail(it)
         }
+        adapter.submitList(response)
         recyclerView_main.adapter = adapter
         recyclerView_main.layoutManager = GridLayoutManager(this, 3)
     }

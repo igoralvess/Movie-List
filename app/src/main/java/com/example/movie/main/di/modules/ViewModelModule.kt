@@ -2,6 +2,7 @@ package com.example.movie.main.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.movie.main.data.repository.MovieDataSourceFactory
 import com.example.movie.main.data.repository.MovieRepository
 import com.example.movie.main.view.MovieActivity
 import com.example.movie.main.viewmodel.MovieViewModel
@@ -17,8 +18,8 @@ class ViewModelModule {
     @Provides
     @IntoMap
     @ViewModelKey(MovieViewModel::class)
-    fun provideMovieViewModule(repository: MovieRepository) : ViewModel {
-        return MovieViewModel(repository)
+    fun provideMovieViewModule(movieDataSource: MovieDataSourceFactory) : ViewModel {
+        return MovieViewModel(movieDataSource)
     }
 
     @Provides

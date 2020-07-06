@@ -1,30 +1,21 @@
 package com.example.movie.main.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.switchMap
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.movie.main.data.model.Movie
-import com.example.movie.main.data.model.MovieRequest
-import com.example.movie.main.data.model.MovieResponse
-import com.example.movie.main.data.repository.MovieRepository
+import com.example.movie.main.data.repository.MovieDataSourceFactory
 import com.example.movie.utils.Constants
 import javax.inject.Inject
 
 class MovieViewModel @Inject constructor(
-    private val repository: MovieRepository
+    private val movieDataSource: MovieDataSourceFactory
 ) : ViewModel() {
-
-    private lateinit var mutableLiveData: MutableLiveData<MovieResponse>
-
+    lateinit var moviePagedList: LiveData<PagedList<Movie>>
     fun init() {
-        val params = MovieRequest(Constants.API_KEY, "1")
-        mutableLiveData = repository.getMovies(params)
+        val config = PagedList.Config.Builder()
+            .setPageSize(Constants.PAGE_SIZE)
+            .build()
+        moviePagedList = LivePagedListBuilder(movieDataSource, config).build()
     }
-
-    fun getMovies(): MutableLiveData<MovieResponse> {
-        return mutableLiveData
-    }
-
 }

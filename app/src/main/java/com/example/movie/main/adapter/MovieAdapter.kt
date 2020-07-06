@@ -3,6 +3,8 @@ package com.example.movie.main.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
 import com.example.movie.main.data.model.Movie
@@ -10,13 +12,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.movie_row.view.*
 
 class MovieAdapter(
-    private val movies: ArrayList<Movie>,
     private val onClick: (Movie) -> Unit
-    ) : RecyclerView.Adapter<CustomViewHolder>() {
-
-    override fun getItemCount(): Int {
-        return movies.size
-    }
+    ) : PagedListAdapter<Movie, CustomViewHolder>(MOVIE_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
 
@@ -26,12 +23,17 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(movies[position])
+        val movie = getItem(position)
+        movie?.let{ holder.bind(it) }
     }
 
-    fun setMovieList(movies: ArrayList<Movie>) {
-        this.movies.addAll(movies)
-        notifyDataSetChanged()
+    companion object {
+        private val MOVIE_COMPARATOR = object : DiffUtil.ItemCallback<Movie>() {
+            override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+                oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
+                newItem == oldItem
+        }
     }
 }
 class CustomViewHolder(private val view : View, private val onClick: (Movie) -> Unit) : RecyclerView.ViewHolder(view) {
