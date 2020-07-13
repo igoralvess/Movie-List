@@ -32,7 +32,7 @@ class MovieRepositoryImpl @Inject constructor(
                 }
 
                 override fun onFailure(call: Call<MovieResponse?>, t: Throwable) {
-                    callback.onException(t)
+                    callback.onError("Erro desconhecido")
                 }
             })
     }

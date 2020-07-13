@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<drawable xmlns:android="http://schemas.android.com/apk/res/android">
-
-</drawable>
+<?xml version="1.0" encoding="UTF-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <gradient
+                    android:startColor="@color/activities_background"
+                    android:endColor="@color/background_gradient"
+                    android:angle="90"/>
+        </shape>
+    </item>
+</selector>

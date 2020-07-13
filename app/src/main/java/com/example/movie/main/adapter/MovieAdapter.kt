@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
 import com.example.movie.main.data.model.Movie
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detail.view.*
 import kotlinx.android.synthetic.main.movie_row.view.*
 
 class MovieAdapter(

@@ -5,7 +5,7 @@
         android:id="@+id/movieDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/activities_background"
+        android:background="@drawable/background"
         tools:context=".main.view.DetailActivity">
 
     <ScrollView
@@ -32,6 +32,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginLeft="10dp"
                     android:text="@string/detail_title_name"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
@@ -40,10 +41,43 @@
                     app:layout_constraintTop_toBottomOf="@+id/detailPoster" />
 
             <TextView
+                    android:id="@+id/releaseDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="dd/mm/yyyy"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailTitle" />
+
+            <ImageView
+                    android:id="@+id/starVote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/star"
+                    app:layout_constraintTop_toTopOf="@+id/vote"
+                    app:layout_constraintBottom_toBottomOf="@+id/vote"
+                    app:layout_constraintEnd_toStartOf="@id/vote" />
+
+            <TextView
+                    android:id="@+id/vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="dd/mm/yyyy"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/releaseDate"
+                    app:layout_constraintTop_toBottomOf="@+id/detailTitle" />
+
+            <TextView
                     android:id="@+id/detailOverview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
+                    android:layout_marginLeft="10dp"
                     android:text="Overview"
                     android:textColor="@android:color/darker_gray"
                     app:layout_constraintBottom_toBottomOf="parent"
